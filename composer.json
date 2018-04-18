@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "PokemonApi\\Module\\": "src/"
+        }
+    },
     "require-dev": {
         "behat/behat": "^3.4"
     },

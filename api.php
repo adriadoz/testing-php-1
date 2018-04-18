@@ -1,12 +1,22 @@
-<?php
+<?php require 'vendor/autoload.php';
 
-$action = $_GET['id'];
+use PokemonApi\Module\PhysicalAttributesPokemonController;
 
-if (isset($id)) {
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-}
-
-header('Content-Type: application/json');
+    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 
-die('{“name”:	“voltorb”,	“weight”:	5,	“height”:	12}');
+    $physicalAttributes  = new PhysicalAttributesPokemonController($url);
+    $result = $physicalAttributes->__invoke();
+
+    if($result["code"]===200){
+        header("HTTP/1.1 200 OK");
+        header('Content-Type: application/json');
+        //die($result["data"]);
+    }elseif ($result["code"]===404){
+        header("HTTP/1.1 404 Not Found");
+    }
+

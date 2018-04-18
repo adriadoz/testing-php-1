@@ -2,7 +2,8 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  * Defines application features from the specific context.
@@ -27,7 +28,7 @@ class FeatureContext implements Context
      */
     public function iDoARequestTo($method, $uri)
     {
-        $client = new Client(['base_uri' => 'https://pokeapi.co/api/v2']);
+        $client = new Client(['base_uri' => 'http://localhost:8080/']);
 
         try {
             $request = $client->request($method, $uri);
