@@ -32,16 +32,19 @@ class PhysicalAttributesPokemonController
                 $request = $client->request($method, $uri);
                 $this->lastResponse   = $request->getBody()->getContents();
                 $this->lastStatusCode = $request->getStatusCode();
+                $this->processedData = $this->extractPhysicalAttributes($this->lastResponse);
             } catch (ClientException $exception) {
-                $this->lastResponse   = $exception->getResponse()->getBody();
+                $this->processedData = $exception->getResponse()->getBody();
                 $this->lastStatusCode = $exception->getResponse()->getStatusCode();
             }
         }
 
-        return array("code" => $this->lastStatusCode, "data" => $this->lastResponse,);
+        return array("code" => $this->lastStatusCode, "data" => $this->processedData,);
     }
 
-    public function extractPhysicalAttributes($rawData){
-        var_dump($rawData);
+    public function extractPhysicalAttributes($rawData): string
+    {
+        //TODO PROCES DATA
+        return '{"name":"voltorb","weight":5,"height":12}';
     }
 }

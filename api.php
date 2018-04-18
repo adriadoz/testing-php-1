@@ -15,7 +15,7 @@ error_reporting(E_ALL);
     if($result["code"]===200){
         header("HTTP/1.1 200 OK");
         header('Content-Type: application/json');
-        //die($result["data"]);
+        die($result["data"]);
     }elseif ($result["code"]===404){
         header("HTTP/1.1 404 Not Found");
     }
